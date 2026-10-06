@@ -24,7 +24,7 @@ Repositório dedicado à documentação técnica da construção e endurecimento
 - [x] Sincronização e ajuste de relógio via NTP (`systemd-timesyncd`).
 - [x] Configuração e ativação do Firewall Unificado (`UFW`) limitando acesso à porta 22/tcp.
 - [x] Implementação de Autenticação por Chaves Criptográficas (`ED25519`).
-- [ ] Desativação de login root e autenticação por senha no SSH (`sshd_config`).
+- [x] Desativação de login root e autenticação por senha no SSH (`sshd_config`).
 - [ ] Instalação e parametrização do `Fail2ban` contra ataques de força bruta.
 
 ## 🛠️ Comandos Principais Utilizados
