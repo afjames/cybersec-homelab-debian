@@ -23,7 +23,7 @@ Repositório dedicado à documentação técnica da construção e endurecimento
 - [x] Atualização de pacotes do sistema (`apt update && apt upgrade`).
 - [x] Sincronização e ajuste de relógio via NTP (`systemd-timesyncd`).
 - [x] Configuração e ativação do Firewall Unificado (`UFW`) limitando acesso à porta 22/tcp.
-- [ ] Implementação de Autenticação por Chaves Criptográficas (`ED25519`).
+- [x] Implementação de Autenticação por Chaves Criptográficas (`ED25519`).
 - [ ] Desativação de login root e autenticação por senha no SSH (`sshd_config`).
 - [ ] Instalação e parametrização do `Fail2ban` contra ataques de força bruta.
 
@@ -34,5 +34,3 @@ ssh jamenson@127.0.0.1 -p 2222
 
 # Verificação do status do Firewall
 sudo ufw status verbose
-
-
