@@ -25,7 +25,7 @@ Repositório dedicado à documentação técnica da construção e endurecimento
 - [x] Configuração e ativação do Firewall Unificado (`UFW`) limitando acesso à porta 22/tcp.
 - [x] Implementação de Autenticação por Chaves Criptográficas (`ED25519`).
 - [x] Desativação de login root e autenticação por senha no SSH (`sshd_config`).
-- [ ] Instalação e parametrização do `Fail2ban` contra ataques de força bruta.
+- [x] Instalação e parametrização do `Fail2ban` contra ataques de força bruta.
 
 ## 🛠️ Comandos Principais Utilizados
 ```bash
@@ -34,3 +34,6 @@ ssh jamenson@127.0.0.1 -p 2222
 
 # Verificação do status do Firewall
 sudo ufw status verbose
+
+# Monitoramento de jails do Fail2ban
+sudo fail2ban-client status sshd
