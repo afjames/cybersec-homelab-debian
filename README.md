@@ -21,9 +21,10 @@ Repositório dedicado à documentação técnica de construção, endurecimento 
 [ Windows Desktop ] ──(LAN / PowerShell)──┐
                                           ├──> [ Ubuntu Host (UFW :2222) ] ──(VirtualBox NAT)──> [ Debian Server (:22) ]
 [ Ubuntu Local ] ────(Loopback / Terminal)─┘
-
+```
 
 ## 🚀 Etapas do Projeto
+
 1. Infraestrutura & Virtualização
 
     [x] Instalação do VirtualBox 7.1 no Ubuntu.
