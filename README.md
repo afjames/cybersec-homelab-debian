@@ -1,39 +1,67 @@
 # 🛡️ Homelab de Cibersegurança & Administração Linux
 
-Repositório dedicado à documentação técnica da construção e endurecimento (*hardening*) de um servidor Debian 12 em ambiente headless (*CLI*).
+Repositório dedicado à documentação técnica de construção, endurecimento (*hardening*) e acesso remoto multi-estação de um servidor Debian 12 em ambiente headless (*CLI*).
 
-## 🧰 Especificações do Ambiente
-* **Hospedeiro (Host):** Ubuntu 24.04 LTS | Asus X555UB
+## 🧰 Arquitetura & Especificações do Ambiente
+
+* **Servidor Alvo (Guest):** Debian 12 Bookworm (Sem interface gráfica)
+* **Hospedeiro Principal (Host/Gateway):** Ubuntu 24.04 LTS | Asus X555UB
 * **Hipervisor:** Oracle VM VirtualBox 7.1
-* **Sistema Convidado (Guest):** Debian 12 (Sem interface gráfica)
-* **Rede:** Modo NAT com Port Forwarding (`Host 127.0.0.1:2222` -> `Guest :22`)
+* **Estação Externa de Acesso:** Windows 11 Desktop (`DESKTOP-K99RLH6`)
+* **Rede & Mapeamento:** 
+  * Modo NAT no VirtualBox com *Port Forwarding* (`Host :2222` -> `Guest :22`).
+  * Acesso local via Loopback (`127.0.0.1:2222`).
+  * Acesso via Rede Local LAN (`192.168.1.x:2222`).
 
-## 🚀 Etapas do Projeto
+---
 
-### 1. Infraestrutura & Virtualização
-- [x] Instalação do VirtualBox 7.1 no Ubuntu Noble.
-- [x] Configuração e assinatura de módulos do Kernel com MOK (Machine-Owner Key) / Secure Boot.
-- [x] Instalação do Debian 12 via ISO Netinst em modo texto.
+## 📐 Topologia de Acesso Remoto
 
-### 2. Acesso Remoto & Redirecionamento
-- [x] Mapeamento de porta de loopback (`127.0.0.1:2222`) para acesso SSH isolado.
-- [x] Adição do usuário comum ao grupo de administradores (`sudoers`).
+```text
+[ Windows Desktop ] ──(LAN / PowerShell)──┐
+                                          ├──> [ Ubuntu Host (UFW :2222) ] ──(VirtualBox NAT)──> [ Debian Server (:22) ]
+[ Ubuntu Local ] ────(Loopback / Terminal)─┘
 
-### 3. Hardening & Segurança Inicial
-- [x] Atualização de pacotes do sistema (`apt update && apt upgrade`).
-- [x] Sincronização e ajuste de relógio via NTP (`systemd-timesyncd`).
-- [x] Configuração e ativação do Firewall Unificado (`UFW`) limitando acesso à porta 22/tcp.
-- [x] Implementação de Autenticação por Chaves Criptográficas (`ED25519`).
-- [x] Desativação de login root e autenticação por senha no SSH (`sshd_config`).
-- [x] Instalação e parametrização do `Fail2ban` contra ataques de força bruta.
 
-## 🛠️ Comandos Principais Utilizados
-```bash
-# Acesso SSH via porta alta do hospedeiro
+🚀 Etapas do Projeto
+1. Infraestrutura & Virtualização
+
+    [x] Instalação do VirtualBox 7.1 no Ubuntu.
+
+    [x] Assinatura de módulos do Kernel com MOK (Machine-Owner Key) para Secure Boot.
+
+    [x] Instalação e provisionamento do Debian 12 via ISO Netinst em modo texto.
+
+    2. Rede Local & Acesso Multi-estação
+
+    [x] Configuração de Redirecionamento de Portas no VirtualBox (2222 -> 22).
+
+    [x] Liberação de tráfego de entrada no firewall do hospedeiro (sudo ufw allow 2222/tcp).
+
+    [x] Estabelecimento de ponte de acesso para a LAN (acesso a partir do Windows via PowerShell).
+
+    3. Hardening & Gestão de Identidades (IAM)
+
+    [x] Atualização e manutenção do sistema (apt update && apt upgrade).
+
+    [x] Sincronização de relógio via NTP (systemd-timesyncd).
+
+    [x] Configuração do Firewall Unificado (UFW) no servidor limitando portas ativas.
+
+    [x] Gerenciamento de múltiplas chaves públicas criptográficas (ED25519) no arquivo ~/.ssh/authorized_keys (Chave Ubuntu + Chave Windows).
+
+    [x] Desativação total de login do root e autenticação por senha no SSH (sshd_config).
+
+    [x] Instalação e parametrização do Fail2ban (3 tentativas, janela de 10 min, banimento de 1 hora).
+
+    Bash
+
+# Acesso a partir do próprio Hospedeiro Ubuntu (Loopback)
 ssh jamenson@127.0.0.1 -p 2222
 
-# Verificação do status do Firewall
-sudo ufw status verbose
+# Acesso a partir da Estação Windows (PowerShell / CMD na LAN)
+ssh jamenson@192.168.1.105 -p 2222
 
-# Monitoramento de jails do Fail2ban
+# Verificação de status do Fail2ban no Debian
 sudo fail2ban-client status sshd
+
