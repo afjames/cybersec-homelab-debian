@@ -23,7 +23,7 @@ Repositório dedicado à documentação técnica de construção, endurecimento 
 [ Ubuntu Local ] ────(Loopback / Terminal)─┘
 
 
-🚀 Etapas do Projeto
+## 🚀 Etapas do Projeto
 1. Infraestrutura & Virtualização
 
     [x] Instalação do VirtualBox 7.1 no Ubuntu.
@@ -32,7 +32,7 @@ Repositório dedicado à documentação técnica de construção, endurecimento 
 
     [x] Instalação e provisionamento do Debian 12 via ISO Netinst em modo texto.
 
-    2. Rede Local & Acesso Multi-estação
+2. Rede Local & Acesso Multi-estação
 
     [x] Configuração de Redirecionamento de Portas no VirtualBox (2222 -> 22).
 
@@ -40,7 +40,7 @@ Repositório dedicado à documentação técnica de construção, endurecimento 
 
     [x] Estabelecimento de ponte de acesso para a LAN (acesso a partir do Windows via PowerShell).
 
-    3. Hardening & Gestão de Identidades (IAM)
+3. Hardening & Gestão de Identidades (IAM)
 
     [x] Atualização e manutenção do sistema (apt update && apt upgrade).
 
